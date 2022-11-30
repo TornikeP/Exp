@@ -1,3 +1,4 @@
+    //   ჰედერისთვის 
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
 const links = document.querySelectorAll(".nav-links li");
@@ -14,7 +15,7 @@ hamburger.addEventListener('click', ()=>{
 });
 
 
-
+                // movie app
 const API_KEY =`427831e0c241af4dae179660da6019b2`
 const image_path =`https://image.tmdb.org/t/p/w1280`
 
@@ -26,6 +27,11 @@ const main_grid = document.querySelector('.movies-grid')
 
 const trending_el = document.querySelector('.trending .movies-grid')
 
+
+
+let slideIndex = 1;
+let slideCaption = "";
+let slideImg = "";
 
 
 const popup_container = document.querySelector('.popup-container')
@@ -300,7 +306,52 @@ async function add_to_dom_trending () {
             </div>
         `
     }).join('')
+
+    const cards = document.querySelectorAll('.card')
+    add_click_effect_to_card(cards)
 }
+
+// slide show
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+async function showSlides(n) {
+    const data = await get_trending_movies();
+    if(n > data.length -1 ) {
+        n = data.length -1;
+        slideIndex = data.length -1;
+    }
+    if(n < 1) {
+        n = 1;
+        slideIndex = 1;
+    }
+    document.getElementById('slideIdex').innerHTML = `${n} / ${data.length -1}`;
+    document.getElementById('slideImage').src = `${image_path + data[n].poster_path}`;
+
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const searchTerm = search.value
+    if(searchTerm && searchTerm !== ''){
+        getMovies(API_KEY + searchTerm)
+            search.value= ''
+    }
+    else{
+        window.location.reload()
+    }
+
+  })
+
 
 
 
