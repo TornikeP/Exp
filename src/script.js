@@ -26,6 +26,8 @@ const main_grid = document.querySelector('.movies-grid')
 
 const trending_el = document.querySelector('.trending .movies-grid')
 
+
+
 const popup_container = document.querySelector('.popup-container')
 
 function add_click_effect_to_card (cards) {
@@ -299,6 +301,9 @@ async function add_to_dom_trending () {
         `
     }).join('')
 }
+
+
+
 
 
 
